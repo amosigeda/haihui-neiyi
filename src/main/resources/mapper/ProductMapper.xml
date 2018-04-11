@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.light.shop.dao.productDao">
+  <resultMap id="BaseResultMap" type="com.light.shop.bean.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sale_price" jdbcType="DECIMAL" property="salePrice" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="type" jdbcType="CHAR" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sale_price, photo, original_price, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.light.shop.bean.Product">
+    insert into product (id, name, sale_price, 
+      photo, original_price, type
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL}, 
+      #{photo,jdbcType=VARCHAR}, #{originalPrice,jdbcType=DECIMAL}, #{type,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.light.shop.bean.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.light.shop.bean.Product">
+    update product
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        sale_price = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.light.shop.bean.Product">
+    update product
+    set name = #{name,jdbcType=VARCHAR},
+      sale_price = #{salePrice,jdbcType=DECIMAL},
+      photo = #{photo,jdbcType=VARCHAR},
+      original_price = #{originalPrice,jdbcType=DECIMAL},
+      type = #{type,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

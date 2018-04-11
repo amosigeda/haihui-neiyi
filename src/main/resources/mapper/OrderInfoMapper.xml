@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.light.shop.dao.OrderInfoDao">
+  <resultMap id="BaseResultMap" type="com.light.shop.bean.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="telnumber" jdbcType="VARCHAR" property="telnumber" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, product_id, num, total_price, createtime, status, description, size, 
+    address, telnumber, name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.light.shop.bean.OrderInfo">
+    insert into order_info (id, order_id, product_id, 
+      num, total_price, createtime, 
+      status, description, size, 
+      address, telnumber, name
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, 
+      #{num,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{telnumber,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.light.shop.bean.OrderInfo">
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="telnumber != null">
+        telnumber,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telnumber != null">
+        #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.light.shop.bean.OrderInfo">
+    update order_info
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telnumber != null">
+        telnumber = #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.light.shop.bean.OrderInfo">
+    update order_info
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telnumber = #{telnumber,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
